@@ -24,10 +24,10 @@
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented.
 
-- [ ] T005 Setup the main Express server in `packages/api/src/index.ts`.
-- [ ] T006 [P] Implement database connection module in `packages/api/src/config/database.ts`.
-- [ ] T007 [P] Add security middleware (Helmet, CORS) to the Express app in `packages/api/src/index.ts`.
-- [ ] T008 [P] Create a generic error handling middleware in the API package.
+- [x] T005 Setup the main Express server in `packages/api/src/index.ts`.
+- [x] T006 [P] Implement database connection module in `packages/api/src/config/database.ts`.
+- [x] T007 [P] Add security middleware (Helmet, CORS) to the Express app in `packages/api/src/index.ts`.
+- [x] T008 [P] Create a generic error handling middleware in the API package.
 
 **Checkpoint**: Foundation ready - user story implementation can now begin.
 

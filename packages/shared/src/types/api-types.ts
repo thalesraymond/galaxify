@@ -1,4 +1,4 @@
-import { Ship, StarSystem, Task, User } from './model-types';
+import { Ship, StarSystem, Task, User } from './model-types.js';
 
 // =================================
 // Task API Types

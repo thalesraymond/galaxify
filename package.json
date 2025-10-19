@@ -1,6 +1,7 @@
 {
     "name": "galaxify",
     "private": true,
+    "type": "module",
     "scripts": {
         "dev:api": "pnpm --filter api dev",
         "dev:web": "pnpm --filter web dev",
