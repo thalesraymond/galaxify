@@ -1,0 +1,39 @@
+name: Release
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            pull-requests: write
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Generate Tag
+              id: generate_tag
+              run: |
+                  DATE=$(date +'%Y.%m.%d')
+                  git fetch --tags
+                  LAST_TAG=$(git tag --list "v$DATE.*" --sort=v:refname | tail -n 1)
+
+                  if [ -z "$LAST_TAG" ]; then
+                    INCREMENT=0
+                  else
+                    INCREMENT=$(echo $LAST_TAG | awk -F. '{print $NF}' | xargs -I {} echo {}+1 | bc)
+                  fi
+
+                  TAG="v$DATE.$INCREMENT"
+                  echo "TAG=$TAG" >> $GITHUB_OUTPUT
+
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  tag_name: ${{ steps.generate_tag.outputs.TAG }}
+                  generate_release_notes: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
