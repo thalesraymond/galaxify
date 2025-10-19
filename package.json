@@ -1,14 +1,16 @@
 {
-  "name": "galaxify",
-  "private": true,
-  "scripts": {
-    "dev:api": "pnpm --filter api dev",
-    "dev:web": "pnpm --filter web dev",
-    "dev": "pnpm run --parallel dev",
-    "build": "pnpm --filter \"./packages/**\" build",
-    "test": "pnpm --filter \"./packages/**\" test"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.0"
-  }
+    "name": "galaxify",
+    "private": true,
+    "scripts": {
+        "dev:api": "pnpm --filter api dev",
+        "dev:web": "pnpm --filter web dev",
+        "dev": "pnpm run --parallel dev",
+        "build": "pnpm --filter \"./packages/**\" build",
+        "test": "pnpm --filter \"./packages/**\" test",
+        "compose:up": "docker compose up --build -d",
+        "compose:down": "docker compose down"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0"
+    }
 }
