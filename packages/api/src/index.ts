@@ -24,7 +24,7 @@ app.use('/api/ship', shipRoutes);
 app.use('/api/systems', systemRoutes);
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../../client/dist')));
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -34,7 +34,7 @@ const limiter = rateLimit({
 });
 
 app.get(/^\/(?!api).*/, limiter, (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+    res.sendFile(path.join(__dirname, "../../client/dist", "index.html"));
 });
 
 
