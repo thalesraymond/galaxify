@@ -1,0 +1,53 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: galaxify-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - galaxify-net
+
+  api:
+    build:
+      context: .
+      dockerfile: packages/api/Dockerfile
+    container_name: galaxify-api
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - "3001:3001"
+    environment:
+      - DATABASE_URL=mongodb://root:password@mongo:27017/galaxify?authSource=admin
+    networks:
+      - galaxify-net
+
+  web:
+    build:
+      context: .
+      dockerfile: packages/web/Dockerfile
+    container_name: galaxify-web
+    restart: always
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_BASE_URL=http://api:3001
+      - PORT=3000
+    networks:
+      - galaxify-net
+
+networks:
+  galaxify-net:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+    driver: local
