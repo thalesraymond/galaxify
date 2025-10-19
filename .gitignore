@@ -169,4 +169,4 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 
-galaxify_specs/.gemini
+.gemini
