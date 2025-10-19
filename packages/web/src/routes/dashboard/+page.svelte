@@ -8,6 +8,9 @@
     />
 </svelte:head>
 
+<script>
+    import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
+</script>
 <div class="bg-[var(--background)] min-h-screen text-[var(--foreground)] font-sans p-4 sm:p-6 lg:p-8" style="font-family: 'Roboto', sans-serif;">
     <header class="flex justify-between items-center mb-8">
         <div class="flex items-center space-x-4">
@@ -18,7 +21,10 @@
             />
             <div>
                 <h1 class="text-2xl font-bold" style="font-family: 'Orbitron', sans-serif;">G A L A X I F Y</h1>
-                <p class="text-sm text-[var(--foreground)]/70">Captain: Astro_J</p>
+                <div class="flex items-center space-x-2">
+                    <p class="text-sm text-[var(--foreground)]/70">Captain: Astro_J</p>
+                    <ThemeSwitcher />
+                </div>
             </div>
         </div>
         <div class="text-right">

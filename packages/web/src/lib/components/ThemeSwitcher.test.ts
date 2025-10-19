@@ -68,7 +68,7 @@ describe('ThemeSwitcher', () => {
     const button = getByRole('button');
     await fireEvent.click(button);
 
-    const nordThemeButton = getByText('nord');
+    const nordThemeButton = getByText('Nord Dark');
     await fireEvent.click(nordThemeButton);
 
     expect(get(theme)).toBe('nord-dark');
