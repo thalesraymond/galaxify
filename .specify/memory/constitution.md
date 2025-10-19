@@ -1,12 +1,9 @@
 <!--
 SYNC IMPACT REPORT
-- Version change: none -> 1.0.0
-- List of modified principles: N/A (new constitution)
+- Version change: 1.0.0 -> 1.1.0
+- List of modified principles: N/A
 - Added sections:
-  - Core Principles
-  - Theming & Style
-  - Development Operations
-  - Governance
+  - Principle VI: Continuous Verification
 - Removed sections: N/A
 - Templates requiring updates:
   - ✅ .specify/templates/plan-template.md (No changes needed, but will be interpreted against new principles)
@@ -33,6 +30,9 @@ The frontend experience is guided by SvelteKit. Routing is file-based (`src/rout
 ### V. Pre-Flight Simulations: A Test-First Galaxy
 All systems MUST be verified with `vitest`. Tests are co-located in a `__tests__` directory that mirrors the `src` structure. Mocking is performed using `vi.mock`, and asynchronous operations are tested for expected outcomes, including failures. All new features or bug fixes require corresponding tests.
 
+### VI. Continuous Verification
+Before marking any task as complete, dependencies MUST be updated and the application MUST be successfully built and run in a development environment. This ensures that all changes are integrated and functional, preventing regressions and ensuring a stable codebase.
+
 ## Theming & Style
 
 All user-facing components, documentation, and internal naming conventions SHOULD reflect a consistent space-exploration theme. Names like "Galactic Core", "Starship", "Mission Control", and "Navigator" are encouraged to create an immersive and unified project identity.
@@ -47,4 +47,4 @@ All user-facing components, documentation, and internal naming conventions SHOUL
 
 This Constitution is the supreme law of the Galaxify project. All code contributions, reviews, and architectural decisions MUST align with its principles. Amendments require a formal proposal, review, and an update to the version number according to Semantic Versioning.
 
-**Version**: 1.0.0 | **Ratified**: 2025-10-19 | **Last Amended**: 2025-10-19
+**Version**: 1.1.0 | **Ratified**: 2025-10-19 | **Last Amended**: 2025-10-19
