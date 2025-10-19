@@ -6,7 +6,8 @@
     "dev:web": "pnpm --filter web dev",
     "dev": "pnpm run --parallel dev",
     "build": "pnpm --filter \"./packages/**\" build",
-    "test": "pnpm --filter \"./packages/**\" test"
+    "test": "pnpm --filter \"./packages/**\" test",
+    "docker:build": "docker-compose down && docker-compose up --build"
   },
   "devDependencies": {
     "typescript": "^5.0.0"
