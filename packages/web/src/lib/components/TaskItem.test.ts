@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/svelte';
 import { describe, it, expect } from 'vitest';
-import TaskItem from './TaskItem.svelte';
+import TaskItem from './src/components/TaskItem.svelte';
+
 
 describe('TaskItem component', () => {
   it('renders the task text', () => {
