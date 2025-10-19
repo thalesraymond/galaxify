@@ -1,0 +1,187 @@
+Jules Agent Prompts for Epic 1: Core Player Experience & Motivation Engine (MVP)
+This document contains a series of prompts for the Jules Agent, designed to systematically build the features outlined in Epic 1. Each prompt corresponds to a specific task and is structured to follow Clean Architecture principles, ensuring a clear separation of concerns, maintainability, and testability.
+You will organize the backend code into the following layers:
+/packages/api/src/domain: Contains core business logic, including entities and use cases. This layer has no dependencies on any other layer.
+/packages/api/src/application: Contains application-specific logic, like controllers that orchestrate the flow of data from the web to the use cases.
+/packages/api/src/infrastructure: Contains all external concerns, such as database implementations (Mongoose Repositories), web frameworks (Express routes), and other third-party integrations.
+Task 1.1.1.1: Define Task Entity and Data Persistence Layer
+Prompt:
+You are Jules, an AI software engineer. Your goal is to define the Task entity and set up its persistence layer according to Clean Architecture principles.
+Context:
+The Task entity is the foundational data model for all user-trackable items. We will define its pure domain representation first, then create the database-specific implementation.
+Specifications:
+Domain Layer:
+In /packages/api/src/domain/entities/, create task.entity.ts. Define a Task class or interface that represents a task with its properties (id, user, type, text, notes, isPositive, isNegative, completed, streak). This should be a plain object with no Mongoose-specific code.
+In /packages/api/src/domain/repositories/, create task.repository.ts. Define a ITaskRepository interface with methods like create(task: Task): Promise<Task> and findById(id: string): Promise<Task | null>.
+Infrastructure Layer:
+In /packages/api/src/infrastructure/database/mongoose/models/, create task.model.ts. Define and export the taskSchema using Mongoose, including all fields, types, and timestamps as originally specified. This is the concrete database model.
+In /packages/api/src/infrastructure/database/mongoose/repositories/, create task.repository.impl.ts. This class will implement the ITaskRepository interface, using the Mongoose Task model to perform the actual database operations.
+Testing:
+Write new unit tests for any business logic within the Task entity itself (if any).
+Your repository implementation does not require unit tests at this stage, as it will be tested via integration tests later.
+Mandatory Guidelines:
+You must follow all guidelines specified in GEMINI.md.
+You must adhere to Clean Architecture and SOLID principles. The dependency rule is key: Domain must not know about Infrastructure.
+After implementing the changes, you MUST run the appropriate build and test commands.
+Task 1.1.1.2: Implement Task Creation and Completion Use Cases and API Endpoints
+Prompt:
+You are Jules, an AI software engineer. Your task is to implement the core business logic for creating and completing tasks and expose it via API endpoints.
+Context:
+This involves creating use cases (interactors) for each action, which will be called by controllers. This separates the business rules from the web delivery mechanism.
+Specifications:
+Domain Layer (Use Cases):
+In /packages/api/src/domain/use-cases/task/, create create-task.use-case.ts. The use case class will have an execute method that takes task data, creates a Task entity, and uses the ITaskRepository (injected via constructor) to save it.
+In the same directory, create complete-task.use-case.ts. Its execute method will find a task by ID and handle the completion logic. For now, this is a simple state change.
+Application Layer (Controllers):
+In /packages/api/src/application/controllers/, create task.controller.ts. This controller will have methods for createTask and completeTask. Each method will instantiate and execute the corresponding use case and return the appropriate HTTP response.
+Infrastructure Layer (Routing & DI):
+In /packages/api/src/infrastructure/web/routes/, create task.routes.ts. Implement the POST /api/tasks and POST /api/tasks/:id/complete endpoints, linking them to the TaskController methods.
+Ensure your dependency injection setup provides the concrete TaskRepositoryImpl to the use cases when they are invoked.
+Testing:
+Write comprehensive unit tests for CreateTaskUseCase and CompleteTaskUseCase.
+You MUST use a mock implementation of ITaskRepository to test the use cases in isolation from the database.
+Mandatory Guidelines:
+Follow all guidelines in GEMINI.md and adhere to Clean Architecture and SOLID principles.
+Run build and test commands to ensure all new and existing tests pass.
+Task 1.1.1.3: Develop the Task Input Svelte Component
+Prompt:
+You are Jules, an AI software engineer. Your goal is to create the frontend component for adding tasks, ensuring a separation of concerns.
+Context:
+This Svelte component will be the primary UI for creating tasks. We will separate the API logic from the component itself for better maintainability.
+Specifications:
+Service Layer:
+In /packages/web/src/lib/services/, create a task.service.ts file. This service will contain a function, e.g., createTask(taskData), which is responsible for making the POST /api/tasks API call.
+Component Layer:
+In /packages/web/src/lib/components/, create the task input Svelte component.
+The component must provide a UI for inputting the task's text and selecting its type (Habit, Daily, To-Do).
+It should use Svelte's bind:value for two-way data binding.
+When the user submits the form, the component will call the createTask function from the task.service.ts.
+Testing:
+Write new component tests for the task input component.
+You MUST mock the task.service.ts to verify that the component calls the service with the correct data upon form submission, without making actual API calls.
+Mandatory Guidelines:
+Follow all guidelines in GEMINI.md and adhere to Clean Architecture and SOLID principles.
+Run build and test commands to ensure all new and existing tests pass.
+Task 1.2.1.1: Define Star System and Discovery Entities and Repositories
+Prompt:
+You are Jules, an AI software engineer. Your goal is to define the StarSystem and Discovery entities and their data persistence layers.
+Context:
+These entities model the user's generated star system and their discoveries. We will follow the established Clean Architecture pattern.
+Specifications:
+Domain Layer:
+In /packages/api/src/domain/entities/, create starSystem.entity.ts and discovery.entity.ts. Define these as plain classes or interfaces. The StarSystem entity should contain an array of Planet entities/value objects.
+In /packages/api/src/domain/repositories/, create starSystem.repository.ts and discovery.repository.ts with their respective repository interfaces (IStarSystemRepository, IDiscoveryRepository).
+Infrastructure Layer:
+In /packages/api/src/infrastructure/database/mongoose/models/, create starSystem.model.ts and discovery.model.ts, defining their Mongoose schemas. The PlanetSchema should be an embedded document array within the starSystem model, a deliberate denormalization for performance.
+In /packages/api/src/infrastructure/database/mongoose/repositories/, create starSystem.repository.impl.ts and discovery.repository.impl.ts to implement the domain repository interfaces.
+Testing:
+Write new unit tests for any business rules within the StarSystem or Discovery entities.
+Mandatory Guidelines:
+Follow all guidelines in GEMINI.md and adhere to Clean Architecture and SOLID principles.
+Run build and test commands to ensure all new and existing tests pass.
+Task 1.2.1.2: Implement Resource Reward Logic
+Prompt:
+You are Jules, an AI software engineer. Your goal is to enhance the CompleteTaskUseCase to grant resources to the user upon task completion.
+Context:
+This implements the central mechanism of our core loop: translating real-world actions into in-game progress. This logic belongs squarely in the domain layer.
+Specifications:
+Domain Layer Enhancement:
+Navigate to /packages/api/src/domain/use-cases/task/complete-task.use-case.ts.
+Enhance the execute method to include the resource reward logic.
+The use case will now need to interact with other repositories (e.g., IUserRepository or IResourceRepository) to find the user and update their resources. You will need to define these new repository interfaces in the domain and implement them in infrastructure.
+The logic mapping task categories to specific resources (e.g., 'Work' -> 'Alloy Plates') must be encapsulated within the domain layer, potentially as a domain service or a private method within the use case.
+Testing:
+You MUST refactor and extend the existing unit tests for CompleteTaskUseCase.
+Add new test cases to cover the reward logic specifically: ensure the correct resource type and quantity are awarded for different task types and that the correct repository methods are called.
+Mandatory Guidelines:
+Follow all guidelines in GEMINI.md and adhere to Clean Architecture and SOLID principles.
+Run build and test commands to ensure all new and existing tests pass.
+Task 1.2.1.3: Implement Get Current System Use Case and Endpoint
+Prompt:
+You are Jules, an AI software engineer. You need to create the full vertical slice for fetching a user's current star system.
+Context:
+The frontend needs an efficient way to get all data for the user's current star system to render the main exploration view. We will create a dedicated use case for this query.
+Specifications:
+Domain Layer:
+In /packages/api/src/domain/use-cases/system/, create get-current-system.use-case.ts. Its execute method will take a user ID and use the IStarSystemRepository to find the system where isCurrent is true.
+Application & Infrastructure Layers:
+Create a SystemController in /packages/api/src/application/controllers/.
+Create a system.routes.ts file in /packages/api/src/infrastructure/web/routes/.
+Implement the GET /api/systems/current endpoint, connecting the route to the controller, which in turn executes the use case.
+Testing:
+Write new unit tests for GetCurrentSystemUseCase. Use a mock IStarSystemRepository that returns a sample star system to verify the use case logic.
+Mandatory Guidelines:
+Follow all guidelines in GEMINI.md and adhere to Clean Architecture and SOLID principles.
+Run build and test commands to ensure all new and existing tests pass.
+Task 1.2.1.4: Develop the Star System View Svelte Component
+Prompt:
+You are Jules, an AI software engineer. Your goal is to create the Svelte component that visually represents the user's star system, keeping presentation separate from data fetching.
+Context:
+This component is the primary visual interface for the user's exploration progress.
+Specifications:
+Service Layer:
+In /packages/web/src/lib/services/, create a system.service.ts. This service will contain a function to make the GET /api/systems/current API call. Consider using a Svelte store within this service to manage the state of the star system data.
+Component Layer:
+Create a new Svelte component for the "Star System View".
+Within the onMount lifecycle function, call the service to fetch the data.
+The component should subscribe to the store (if used) and visually represent the star system, displaying discovered planets and progress toward the "Escape Vector" mission.
+Testing:
+Write new component tests for the Star System View.
+You MUST mock the system.service.ts to provide sample data and verify that the component renders the planets and progress correctly.
+Mandatory Guidelines:
+Follow all guidelines in GEMINI.md and adhere to Clean Architecture and SOLID principles.
+Run build and test commands to ensure all new and existing tests pass.
+Task 1.3.1.1: Define Ship Entity and Repository
+Prompt:
+You are Jules, an AI software engineer. Your task is to define the Ship entity and its persistence layer.
+Context:
+This schema will store the configuration of the user's ship and the parts they have crafted, central to the customization feature.
+Specifications:
+Domain Layer:
+In /packages/api/src/domain/entities/, create ship.entity.ts. The Ship entity will contain an array of Part value objects/entities. The Part definition should also live here.
+In /packages/api/src/domain/repositories/, create ship.repository.ts and define the IShipRepository interface.
+Infrastructure Layer:
+In /packages/api/src/infrastructure/database/mongoose/models/, create ship.model.ts with the Mongoose schema. The Part schema should be embedded. The effects array is a key feature for extensibility.
+In /packages/api/src/infrastructure/database/mongoose/repositories/, create ship.repository.impl.ts to implement the IShipRepository interface.
+Testing:
+Write unit tests for the Ship and Part entities, especially if they contain any logic (e.g., methods to add or validate parts).
+Mandatory Guidelines:
+Follow all guidelines in GEMINI.md and adhere to Clean Architecture and SOLID principles.
+Run build and test commands to ensure all new and existing tests pass.
+Task 1.3.1.2: Implement Ship Crafting and Retrieval Use Cases and Endpoints
+Prompt:
+You are Jules, an AI software engineer. Your goal is to implement the business logic for retrieving ship data and crafting new parts, following the CQRS pattern at the use-case level.
+Context:
+We will create separate use cases for the command (crafting) and the query (retrieving), which will then be exposed via API endpoints.
+Specifications:
+Domain Layer (Use Cases):
+In /packages/api/src/domain/use-cases/ship/, create get-ship-by-user.use-case.ts.
+In the same directory, create craft-ship-part.use-case.ts. This use case will contain the logic for checking if a user has enough resources (requiring another repository dependency) and then adding the new part to the ship.
+Application & Infrastructure Layers:
+Create a ShipController and ship.routes.ts.
+Implement the POST /api/ship/craft and GET /api/ship endpoints, connecting them to their respective use cases via the controller.
+Testing:
+Write new unit tests for both GetShipByUserUseCase and CraftShipPartUseCase.
+For the crafting use case, your tests must cover scenarios for both sufficient and insufficient resources, mocking all repository dependencies.
+Mandatory Guidelines:
+Follow all guidelines in GEMINI.md and adhere to Clean Architecture and SOLID principles.
+Run build and test commands to ensure all new and existing tests pass.
+Task 1.3.1.3: Develop the Shipyard Svelte Component
+Prompt:
+You are Jules, an AI software engineer. Your final task for this epic is to create the "Shipyard" Svelte component.
+Context:
+The Shipyard is the UI for viewing and customizing the ship. We'll follow the pattern of separating the component from the service that handles API calls.
+Specifications:
+Service Layer:
+In /packages/web/src/lib/services/, create a ship.service.ts (or add to it).
+Implement functions for getShip() (GET /api/ship) and craftPart(partData) (POST /api/ship/craft). Manage the ship state, preferably in a Svelte store.
+Component Layer:
+Create a new Svelte component named "Shipyard".
+On mount, it should call the service to fetch and display the user's ship and parts.
+It must provide a UI for selecting and crafting new parts, which calls the craftPart service function on user action.
+Testing:
+Write component tests for the Shipyard.
+You MUST mock the ship.service.ts. One test should verify the ship data is displayed correctly from the mock, and another should verify the craftPart function is called when the user clicks the craft button.
+Mandatory Guidelines:
+Follow all guidelines in GEMINI.md and adhere to Clean Architecture and SOLID principles.
+Run build and test commands to ensure all new and existing tests pass.
