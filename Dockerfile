@@ -20,7 +20,7 @@ COPY . .
 RUN pnpm build
 
 # Deploy the api package to a separate directory for production
-RUN pnpm --filter api deploy /prod/api
+RUN pnpm --filter api deploy --legacy /prod/api
 
 # Stage 2: Production
 FROM node:18-alpine
