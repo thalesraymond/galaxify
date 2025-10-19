@@ -13,10 +13,10 @@
 
 **Purpose**: Project initialization and basic structure.
 
-- [ ] T001 [P] Configure shared TypeScript settings in `packages/shared/tsconfig.json`.
-- [ ] T002 [P] Define shared data types in `packages/shared/src/types/model-types.ts` based on `data-model.md`.
-- [ ] T003 [P] Configure Vitest for the backend in `packages/api/vitest.config.js` using `@swc/jest`.
-- [ ] T004 [P] Configure Vitest for the frontend in `packages/web/vitest.config.js`.
+- [x] T001 [P] Configure shared TypeScript settings in `packages/shared/tsconfig.json`.
+- [x] T002 [P] Define shared data types in `packages/shared/src/types/model-types.ts` based on `data-model.md`.
+- [x] T003 [P] Configure Vitest for the backend in `packages/api/vitest.config.js` using `@swc/jest`.
+- [x] T004 [P] Configure Vitest for the frontend in `packages/web/vitest.config.js`.
 
 ---
 
