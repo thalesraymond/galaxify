@@ -4,7 +4,8 @@
     "scripts": {
         "dev": "pnpm --parallel --filter @galaxify/* run dev",
         "build": "pnpm --filter @galaxify/* run build",
-        "lint": "pnpm --filter @galaxify/* run lint"
+        "lint": "pnpm --filter @galaxify/* run lint",
+        "test": "pnpm --filter @galaxify/* run test"
     },
     "devDependencies": {
         "@eslint/js": "^9.38.0",
