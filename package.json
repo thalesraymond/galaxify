@@ -12,6 +12,8 @@
         "compose:down": "docker compose down"
     },
     "devDependencies": {
+        "@testing-library/jest-dom": "^6.9.1",
+        "postcss": "^8.5.6",
         "typescript": "^5.0.0"
     }
 }
