@@ -1,0 +1,8 @@
+-   pnpm workspaces
+-   Express.js
+-   Vite
+-   Vitest
+-   helmet
+-   express-mongo-sanitize
+-   express-rate-limit
+-   morgan
