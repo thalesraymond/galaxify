@@ -45,7 +45,7 @@ Tasks marked with `[P]` can be executed in parallel within the same phase.
 - [ ] T016 [US1] Create the `packages/web` directory for the frontend in `/packages/web`
 - [ ] T017 [P] [US1] Initialize the `packages/web` package with a `package.json` file in `/packages/web/package.json`
 - [ ] T018 [P] [US1] Create a `tsconfig.json` for the `web` package in `/packages/web/tsconfig.json`
-- [ ] T019 [P] [US1] Create the `next.config.js` file with the API proxy configuration in `/packages/web/next.config.js`
+- [ ] T019 [P] [US1] Create the `vite.config.ts` file with the API proxy configuration in `/packages/web/vite.config.ts`
 
 ## Phase 4: User Story 2 - Production Build
 

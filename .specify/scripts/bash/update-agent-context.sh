@@ -10,7 +10,6 @@ touch "$context_file"
 technologies=(
   "pnpm workspaces"
   "Express.js"
-  "Next.js"
   "Vite"
   "Vitest"
   "helmet"

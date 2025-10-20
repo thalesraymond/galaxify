@@ -9,7 +9,7 @@
 ## 2. Technology Stack
 
 - **Backend**: Node.js, Express, TypeScript
-- **Frontend**: Next.js, React, TypeScript
+- **Frontend**: Vite, React, TypeScript
 - **Package Manager**: pnpm
 - **Testing**: Vitest
 

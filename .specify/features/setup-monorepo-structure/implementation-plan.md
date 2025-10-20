@@ -5,6 +5,7 @@
 This feature will be implemented using the following technologies:
 
 - **Monorepo Management**: pnpm workspaces will be used to manage the different packages.
+- **Tooling**: Vite and Vitest will be used for building and testing.
 - **Backend**:
     - **Framework**: Express.js
     - **Language**: TypeScript
@@ -15,7 +16,7 @@ This feature will be implemented using the following technologies:
         - `express-rate-limit` for rate limiting.
         - `morgan` for HTTP request logging in development.
 - **Frontend**:
-    - **Framework**: Next.js with React
+    - **Framework**: React
     - **Language**: TypeScript
     - **Rendering**: Server-side rendering (SSR)
 - **Shared Code**: A dedicated package (`/packages/commons`) will be created to share types and other common code between the frontend and backend.
@@ -25,7 +26,7 @@ This feature will be implemented using the following technologies:
         - `pnpm run dev`: To start both frontend and backend in development mode.
         - `pnpm run build`: To build both frontend and backend for production.
         - `pnpm run lint`: To lint the entire codebase.
-- **API Proxy**: The Next.js frontend will be configured to proxy all requests from `/api` to the Express.js backend.
+- **API Proxy**: The frontend will be configured to proxy all requests from `/api` to the Express.js backend.
 - **Environment Management**: An `.env_example` file will be created at the root of the project to document the required environment variables.
 - **Version Control**: A `.gitignore` file will be configured to exclude unnecessary files from version control.
 
@@ -38,7 +39,7 @@ The plan is checked against the project constitution:
 - **[x] Simplicity**: The monorepo structure with unified commands simplifies the development and build process.
 - **[x] Developer Experience**: The primary goal of this feature is to create a streamlined developer experience, which is in direct alignment with the constitution.
 - **[x] Modularity**: The project is designed to be modular, with separate packages for the frontend, backend, and shared code.
-- **[x] Technology Stack**: The plan uses the prescribed technology stack (Node.js, Express, Next.js, TypeScript, pnpm, Vitest).
+- **[x] Technology Stack**: The plan uses the prescribed technology stack (Node.js, Express, React, Vite, TypeScript, pnpm, Vitest).
 - **[x] Code Quality**: The plan includes a linting command to enforce code quality.
 
 **Result**: The implementation plan is in full alignment with the project constitution.
