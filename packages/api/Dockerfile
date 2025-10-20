@@ -1,7 +1,7 @@
 # Dockerfile for the API service
 
 # 1. Use a Node.js base image
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 # 2. Set up pnpm
 RUN npm install -g pnpm

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateRewards } from './calculateRewards';
+import { calculateRewards } from "./calculateRewards.js";
 
 describe('calculateRewards', () => {
   it('should return the base reward for a low streak', () => {
