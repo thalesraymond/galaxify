@@ -6,6 +6,7 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
+    files: ["**/*.ts", "**/*.tsx"],
     plugins: {
       react,
     },
