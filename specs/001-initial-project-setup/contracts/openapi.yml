@@ -1,0 +1,184 @@
+openapi: 3.0.0
+info:
+  title: Galaxify API
+  version: 1.0.0
+  description: API for the Galaxify application.
+
+paths:
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: User created successfully.
+        '400':
+          description: Invalid input.
+
+  /api/auth/login:
+    post:
+      summary: Login a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: User logged in successfully.
+        '401':
+          description: Unauthorized.
+
+  /api/tasks:
+    post:
+      summary: Create a new task
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '201':
+          description: Task created.
+
+  /api/tasks/{id}/complete:
+    post:
+      summary: Mark a task as complete
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Task marked as complete and rewards granted.
+
+  /api/systems/current:
+    get:
+      summary: Get the current star system for the user
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Current star system data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StarSystem'
+
+  /api/ship:
+    get:
+      summary: Get the user's ship data
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Ship data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ship'
+
+  /api/ship/craft:
+    post:
+      summary: Craft a new ship part
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                partName:
+                  type: string
+      responses:
+        '200':
+          description: Part crafted successfully.
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: auth-token
+
+  schemas:
+    Task:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: ['HABIT', 'DAILY', 'TODO']
+        text:
+          type: string
+        notes:
+          type: string
+
+    StarSystem:
+      type: object
+      properties:
+        name:
+          type: string
+        planets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Planet'
+
+    Planet:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+
+    Ship:
+      type: object
+      properties:
+        name:
+          type: string
+        partSlots:
+          type: integer
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipPart'
+
+    ShipPart:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum: ['SCANNER', 'ENGINE', 'MINING_LASER']
+        description:
+          type: string
+        effects:
+          type: array
+          items:
+            type: object

@@ -1,17 +1,20 @@
+<script>
+    import ThemeSwitcher from "$lib/components/ThemeSwitcher.svelte";
+</script>
+
 <svelte:head>
     <title>Dashboard | Galaxify</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet"
     />
 </svelte:head>
-
-<script>
-    import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
-</script>
-<div class="bg-[var(--background)] min-h-screen text-[var(--foreground)] font-sans p-4 sm:p-6 lg:p-8" style="font-family: 'Roboto', sans-serif;">
+<div
+    class="bg-[var(--background)] min-h-screen text-[var(--foreground)] font-sans p-4 sm:p-6 lg:p-8"
+    style="font-family: 'Roboto', sans-serif;"
+>
     <header class="flex justify-between items-center mb-8">
         <div class="flex items-center space-x-4">
             <img
@@ -37,7 +40,9 @@
 
     <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Habits Column -->
-        <div class="bg-[var(--background)]/50 rounded-lg p-6 border border-[var(--foreground)]/20 shadow-lg backdrop-blur-sm">
+        <div
+            class="bg-[var(--background)]/50 rounded-lg p-6 border border-[var(--foreground)]/20 shadow-lg backdrop-blur-sm"
+        >
             <h2
                 class="text-xl font-bold mb-4 pb-2 border-b-2 border-[var(--primary)]"
                 style="font-family: 'Orbitron', sans-serif;"
@@ -101,7 +106,9 @@
         </div>
 
         <!-- Dailies Column -->
-        <div class="bg-[var(--background)]/50 rounded-lg p-6 border border-[var(--foreground)]/20 shadow-lg backdrop-blur-sm">
+        <div
+            class="bg-[var(--background)]/50 rounded-lg p-6 border border-[var(--foreground)]/20 shadow-lg backdrop-blur-sm"
+        >
             <h2
                 class="text-xl font-bold mb-4 pb-2 border-b-2 border-[var(--secondary)]"
                 style="font-family: 'Orbitron', sans-serif;"
@@ -155,7 +162,9 @@
         </div>
 
         <!-- To-Dos Column -->
-        <div class="bg-[var(--background)]/50 rounded-lg p-6 border border-[var(--foreground)]/20 shadow-lg backdrop-blur-sm">
+        <div
+            class="bg-[var(--background)]/50 rounded-lg p-6 border border-[var(--foreground)]/20 shadow-lg backdrop-blur-sm"
+        >
             <h2
                 class="text-xl font-bold mb-4 pb-2 border-b-2 border-[var(--accent)]"
                 style="font-family: 'Orbitron', sans-serif;"

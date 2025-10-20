@@ -24,6 +24,7 @@ services:
     ports:
       - "3001:3001"
     environment:
+      - MONGODB_URI=mongodb://root:password@mongo:27017/galaxify?authSource=admin
       - DATABASE_URL=mongodb://root:password@mongo:27017/galaxify?authSource=admin
     networks:
       - galaxify-net

@@ -1,33 +1,21 @@
 export interface User {
-  _id: string;
+  userId: string;
   email: string;
-  username: string;
-  ship: string; // ObjectId
+  passwordHash: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface Part {
-  name: string;
-  type: 'SCANNER' | 'ENGINE' | 'MINING_LASER' | 'SCOOP';
-  description: string;
-  effects: { effectType: string; value: number }[];
-}
-
-export interface Ship {
-  _id: string;
-  user: string; // ObjectId
-  name: string;
-  partSlots: number;
-  parts: Part[];
-  createdAt: Date;
-  updatedAt: Date;
+export enum TaskType {
+  HABIT = 'HABIT',
+  DAILY = 'DAILY',
+  TODO = 'TODO',
 }
 
 export interface Task {
-  _id: string;
-  user: string; // ObjectId
-  type: 'HABIT' | 'DAILY' | 'TODO';
+  taskId: string;
+  user: string; // userId
+  type: TaskType;
   text: string;
   notes?: string;
   isPositive: boolean;
@@ -38,43 +26,65 @@ export interface Task {
   updatedAt: Date;
 }
 
+export enum ShipPartType {
+  SCANNER = 'SCANNER',
+  ENGINE = 'ENGINE',
+  MINING_LASER = 'MINING_LASER',
+}
+
+export interface ShipPartEffect {
+  effectType: string; // e.g., 'REWARD_BONUS'
+  value: number;
+}
+
+export interface ShipPart {
+  name: string;
+  type: ShipPartType;
+  description?: string;
+  effects: ShipPartEffect[];
+}
+
+export interface Ship {
+  shipId: string;
+  user: string; // userId
+  name: string;
+  partSlots: number;
+  parts: ShipPart[];
+}
+
 export interface Planet {
-    name: string;
-    type: string;
-    isExplored: boolean;
+  planetId: string;
+  name: string;
+  description?: string;
+  discoveredAt: Date;
 }
 
 export interface StarSystem {
-  _id: string;
-  user: string; // ObjectId
+  systemId: string;
+  user: string; // userId
   name: string;
   isCurrent: boolean;
-  planetCount: number;
-  escapeVector: {
-    requiredTasks: { taskType: string; habitText: string; count: number }[];
-    isCompleted: boolean;
-  };
   planets: Planet[];
-  createdAt: Date;
-  updatedAt: Date;
+}
+
+export enum DiscoveryType {
+  PLANET = 'PLANET',
+  CREATURE = 'CREATURE',
+  LORE = 'LORE',
 }
 
 export interface Discovery {
-  _id: string;
-  user: string; // ObjectId
-  type: 'PLANET' | 'CREATURE' | 'ANOMALY' | 'LORE_FRAGMENT';
+  discoveryId: string;
+  user: string; // userId
+  type: DiscoveryType;
   name: string;
-  description: string;
-  starSystem: string; // ObjectId
-  createdAt: Date;
-  updatedAt: Date;
+  description?: string;
+  discoveredAt: Date;
 }
 
-export interface Resource {
-    _id: string;
-    user: string; // ObjectId
-    type: string;
-    quantity: number;
-    createdAt: Date;
-    updatedAt: Date;
+export interface Party {
+  partyId: string;
+  name: string;
+  members: string[]; // userIds
+  activeEvent?: string;
 }
