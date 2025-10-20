@@ -14,6 +14,7 @@ export class UserAdapter {
 
   public static toPersistence(user: User): IUser {
     return {
+      _id: user.id,
       email: user.email,
       name: user.name,
       lastName: user.lastName,
