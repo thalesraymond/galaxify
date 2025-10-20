@@ -92,3 +92,5 @@ ehthumbs_vista.db
 *.njsproj
 *.sln
 *.swp
+
+.gemini
