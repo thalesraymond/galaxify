@@ -8,8 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-roboto);
+  --font-mono: var(--font-orbitron);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,111 +20,30 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-roboto);
+    background-color: #0A0F1E; /* Deep Cosmic Blue */
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.font-orbitron {
+    font-family: var(--font-orbitron);
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Efeito de brilho sutil para elementos da HUD */
+.hud-glow {
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.2), 0 0 10px rgba(0, 255, 255, 0.1);
 }
 
-@keyframes bounceIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  60% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(1); }
+.hud-border {
+    border: 1px solid rgba(0, 200, 200, 0.2);
 }
 
-@keyframes pulseSlow {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+/* Fundo animado de estrelas */
+.stars {
+    background: #0A0F1E url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjEwMHB4IiBoZWlnaHQ9IjEwMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwIDEwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGNpcmNsZSBmaWxsPSIjRkZGRkZGIiBjeD0iNi41IiBjeT0iNi41IiByPSIxLjUiLz48Y2lyY2xlIGZpbGw9IiNGRkZGRkYiIGN4PSI4NS41IiBjeT0iOC41IiByPSIxLjUiLz48Y2lyY2xlIGZpbGw9IiNGRkZGRkYiIGN4PSI3MC41IiBjeT0iNDQuNSIgcj0iMS41IiLz48Y2lyY2xlIGZpbGw9IiNGRkZGRkYiIGN4PSI5LjUiIGN5PSI0NSIgcj0iMS41Ii8+PGNpcmNsZSBmaWxsPSIjRkZGRkZGIiBjeD0iODguNSIgY3k9IjkyLjUigcj0iMS41Ii8+PC9zdmc+) repeat;
+    animation: move-stars 120s linear infinite;
 }
 
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-50px); }
-  to { opacity: 1; transform: translateX(0); }
+@keyframes move-stars {
+    from {background-position: 0 0;}
+    to {background-position: 0 1000px;}
 }
-
-@keyframes slideInUp {
-  from { opacity: 0; transform: translateY(50px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(50px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 1s ease-out forwards;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.8s ease-out forwards;
-}
-
-.animate-bounce-in {
-  animation: bounceIn 0.8s ease-out forwards;
-}
-
-.animate-fade-in-delay {
-  animation: fadeIn 1s ease-out 0.5s forwards;
-}
-
-.animate-fade-in-delay-more {
-  animation: fadeIn 1s ease-out 1s forwards;
-}
-
-.animate-pulse-slow {
-  animation: pulseSlow 4s infinite ease-in-out;
-}
-
-/* Scroll-triggered animations (requires JS for full effect, but basic classes for visibility) */
-.animate-fade-in-scroll {
-  opacity: 0;
-  transition: opacity 0.6s ease-out;
-}
-
-.animate-fade-in-scroll.is-visible {
-  opacity: 1;
-}
-
-.animate-slide-in-left {
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.animate-slide-in-left.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.animate-slide-in-up {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.animate-slide-in-up.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.animate-slide-in-right {
-  opacity: 0;
-  transform: translateX(50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.animate-slide-in-right.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
