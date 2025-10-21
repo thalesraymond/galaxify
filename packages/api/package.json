@@ -15,7 +15,8 @@
         "express-rate-limit": "^8.1.0",
         "helmet": "^8.1.0",
         "morgan": "^1.10.0",
-        "vite-plugin-node": "^7.0.0"
+        "vite-plugin-node": "^7.0.0",
+        "@galaxify/commons": "../commons"
     },
     "devDependencies": {
         "@eslint/js": "^9.3.0",
