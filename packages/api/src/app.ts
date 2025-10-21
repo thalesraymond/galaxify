@@ -22,8 +22,12 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
+import registerRoutes from "./features/register/register.routes";
+
 app.get("/api/health", (req, res) => {
     res.status(200).json({ status: "ok" });
 });
+
+app.use("/api/auth", registerRoutes);
 
 export default app;
