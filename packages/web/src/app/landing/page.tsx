@@ -1,3 +1,6 @@
+import StarSystem from "@/features/star-system/StarSystem";
+import { solarSystemData } from "@/lib/mock-data/star-system-data";
+
 export default function LandingPage() {
     return (
         <div className="bg-blue-950 text-gray-200 antialiased">
@@ -41,61 +44,8 @@ export default function LandingPage() {
                                 </a>
                             </div>
                             {/* Visual simulado da nave ou mapa estelar */}
-                            <div className="mt-16 max-w-3xl mx-auto p-4 hud-border rounded-lg bg-gray-900/40 backdrop-blur-sm">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-full h-auto"
-                                    viewBox="0 0 800 400"
-                                    fill="none"
-                                >
-                                    <defs>
-                                        <radialGradient id="grad1" cx="50%" cy="50%" r="50%">
-                                            <stop offset="0%" stopColor="rgba(0,255,255,0.2)" />
-                                            <stop offset="100%" stopColor="rgba(0,255,255,0)" />
-                                        </radialGradient>
-                                    </defs>
-                                    <circle cx="400" cy="200" r="150" fill="url(#grad1)" />
-                                    {/* Linhas da HUD */}
-                                    <path
-                                        d="M100 200 H700 M400 50 V350"
-                                        stroke="#06b6d4"
-                                        strokeWidth="1"
-                                        strokeOpacity="0.3"
-                                    />
-                                    <circle
-                                        cx="400"
-                                        cy="200"
-                                        r="100"
-                                        stroke="#06b6d4"
-                                        strokeWidth="1"
-                                        strokeDasharray="4 4"
-                                        strokeOpacity="0.5"
-                                    />
-                                    <circle
-                                        cx="400"
-                                        cy="200"
-                                        r="180"
-                                        stroke="#06b6d4"
-                                        strokeWidth="1"
-                                        strokeDasharray="8 8"
-                                        strokeOpacity="0.3"
-                                    />
-                                    {/* Nave central */}
-                                    <path d="M400 180 L420 220 L380 220 Z" fill="#f0f0f0" />
-                                    <rect x="395" y="220" width="10" height="15" fill="#f0f0f0" />
-                                    {/* Planetas/Alvos */}
-                                    <circle cx="250" cy="150" r="8" fill="#0ea5e9" />
-                                    <text x="265" y="155" fontFamily="Roboto" fontSize="12" fill="#e5e7eb">
-                                        System X-1
-                                    </text>
-                                    <circle cx="550" cy="250" r="12" fill="#f59e0b" />
-                                    <text x="565" y="255" fontFamily="Roboto" fontSize="12" fill="#e5e7eb">
-                                        Gas Giant
-                                    </text>
-                                </svg>
-                                <p className="text-center text-sm text-cyan-400/70 mt-2 font-orbitron tracking-widest">
-                                    STARMAP: SOL-SECTOR-28A
-                                </p>
+                            <div className="mt-16 max-w-3xl mx-auto p-4 hud-border rounded-lg bg-gray-900/40 backdrop-blur-sm h-[800px]">
+                                <StarSystem data={solarSystemData} />
                             </div>
                         </section>
 
