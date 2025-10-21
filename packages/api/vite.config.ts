@@ -1,15 +1,17 @@
-import { defineConfig } from 'vite';
-import { VitePluginNode } from 'vite-plugin-node';
+import { defineConfig } from "vite";
+import { VitePluginNode } from "vite-plugin-node";
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  server: {
-    port: 4000,
-  },
-  plugins: [
-    ...VitePluginNode({
-      adapter: 'express',
-      appPath: './src/app.ts',
-      exportName: 'default',
-    }),
-  ],
+    server: {
+        port: 4000,
+    },
+    plugins: [
+        tsconfigPaths(),
+        ...VitePluginNode({
+            adapter: "express",
+            appPath: "./src/app.ts",
+            exportName: "default",
+        }),
+    ],
 });
