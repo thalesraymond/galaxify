@@ -7,7 +7,7 @@
 
 ## 1. Feature Overview
 
-This feature converts the existing React-based web package from a client-side rendering (CSR) model to a server-side rendering (SSR) model. The primary goals are to improve initial page load performance for a better user experience and to enhance search engine optimization (SEO) by delivering fully rendered HTML to web crawlers.
+This feature converts the existing React-based web package from a client-side rendering (CSR) model to a server-side rendering (SSR) model. The primary goals are to improve initial page load performance for a better user experience and to enhance search engine optimization (SEO) by delivering fully rendered HTML to web crawlers. The current client render model is to be discarted.
 
 ## Clarifications
 
