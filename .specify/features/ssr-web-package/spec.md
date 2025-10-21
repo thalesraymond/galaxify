@@ -17,10 +17,10 @@ This feature converts the existing React-based web package from a client-side re
 - Q: What are the reliability and availability expectations (e.g., uptime targets)? → A: Best effort (no specific uptime target)
 - Q: What level of observability (logging, metrics, tracing) is required for the SSR component? → A: Basic logging and error reporting
 - Q: What are the security and privacy requirements for the SSR component? → A: Standard web security practices (e.g., input validation, secure headers)
-- Q: How should the SSR component handle failures when fetching data from the API package? → A: Basic error handling (e.g., retries, circuit breakers)
+    - Q: How should the SSR component handle failures when fetching data from the API package? → A: Basic error handling (e.g., retries, circuit breakers)
+    - Q: How is the initial application state, including fetched data, transferred from the server to the client for hydration? → A: Serialize state into a global JavaScript variable (`window.__INITIAL_STATE__`) in the HTML.
 
 ## 2. User Scenarios & Testing
-
 ### 2.1. Main Success Scenario
 
 - **Given**: A user with a standard web browser navigates to a specific URL of the application.
@@ -71,6 +71,7 @@ This feature converts the existing React-based web package from a client-side re
 - Reliability and availability are best effort, with no specific uptime target.
 - Basic logging and error reporting are required for the SSR component.
 - Standard web security practices (e.g., input validation, secure headers) should be applied to the SSR component.
+- The initial application state and fetched data will be serialized into a global JavaScript variable (`window.__INITIAL_STATE__`) in the HTML for client-side hydration.
 
 ### 6.2. Dependencies
 
