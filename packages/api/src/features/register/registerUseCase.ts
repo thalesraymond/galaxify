@@ -1,6 +1,6 @@
-import { RegisterDTO } from "./register.dto.js";
-import { User } from "./user.entity.js";
-import { UserRepository } from "./user.repository.js";
+import { RegisterDTO } from "./registerDTO.js";
+import { User } from "./userEntity.js";
+import { UserRepository } from "./userRepository.js";
 import bcrypt from "bcrypt";
 
 export class RegisterUseCase {

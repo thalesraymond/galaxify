@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import request from "supertest";
 import app from "../src/app";
-import { UserModel } from "../src/features/register/user.model";
+import { UserModel } from "../src/features/register/userModel";
 
 vi.mock("../src/features/register/user.model");
 

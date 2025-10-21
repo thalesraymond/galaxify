@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { User } from "./user.entity.js";
+import { User } from "./userEntity.js";
 
 const userSchema = new Schema<User>({
     id: { type: String, required: true, unique: true },

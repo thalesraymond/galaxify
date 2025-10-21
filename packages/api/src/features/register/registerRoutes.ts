@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { RegisterController } from "./register.controller.js";
-import { RegisterUseCase } from "./register.use-case.js";
-import { MongoUserRepository } from "./user.repository.js";
+import { RegisterController } from "./registerController.js";
+import { RegisterUseCase } from "./registerUseCase.js";
+import { MongoUserRepository } from "./userRepository.js";
 
 const router = Router();
 

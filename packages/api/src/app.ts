@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
-import registerRoutes from "./features/register/register.routes";
+import registerRoutes from "./features/register/registerRoutes.js";
 
 app.get("/api/health", (req, res) => {
     res.status(200).json({ status: "ok" });

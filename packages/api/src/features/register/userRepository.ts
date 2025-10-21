@@ -1,5 +1,5 @@
-import { User } from "./user.entity.js";
-import { UserModel } from "./user.model.js";
+import { User } from "./userEntity.js";
+import { UserModel } from "./userModel.js";
 
 export interface UserRepository {
     findByEmail(email: string): Promise<User | null>;
