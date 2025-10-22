@@ -22,8 +22,12 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
+import authRouter from "./features/userRegister/index.js";
+
 app.get("/api/health", (req, res) => {
     res.status(200).json({ status: "ok" });
 });
+
+app.use("/api/auth", authRouter);
 
 export default app;
