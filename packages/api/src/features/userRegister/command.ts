@@ -1,6 +1,5 @@
 // The core business logic and data access
 import { RegisterUserDto } from "@galaxify/commons";
-import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 // The entity representing our user
