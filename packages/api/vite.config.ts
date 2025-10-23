@@ -6,5 +6,11 @@ export default defineConfig(() => ({
     server: {
         port: 4000,
     },
-    plugins: [tsconfigPaths()],
+    plugins: [
+        ...VitePluginNode({
+            adapter: "express",
+            appPath: "src/app.ts",
+        }),
+        tsconfigPaths(),
+    ],
 }));
