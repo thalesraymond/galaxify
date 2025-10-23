@@ -2,7 +2,7 @@
     "name": "@galaxify/api",
     "version": "1.0.0",
     "type": "module",
-    "main": "src/server.ts",
+    "main": "src/app.ts",
     "scripts": {
         "dev": "vite",
         "build": "tsc",
@@ -10,10 +10,14 @@
         "test": "vitest"
     },
     "dependencies": {
+        "@galaxify/commons": "../commons",
+        "bcryptjs": "^3.0.2",
+        "dotenv": "^17.2.3",
         "express": "^5.1.0",
         "express-mongo-sanitize": "^2.2.0",
         "express-rate-limit": "^8.1.0",
         "helmet": "^8.1.0",
+        "mongoose": "^8.19.2",
         "morgan": "^1.10.0",
         "vite-plugin-node": "^7.0.0"
     },
