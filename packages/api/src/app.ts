@@ -3,6 +3,13 @@ import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
+import mongoose from "mongoose";
+
+// routes
+
+import authRouter from "./features/userRegister/index.js";
+
+//end routes
 
 const app = express();
 
@@ -25,8 +32,6 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
-import authRouter from "./features/userRegister/index.js";
-import mongoose from "mongoose";
 
 app.get("/api/health", (req, res) => {
     res.status(200).json({ status: "ok" });

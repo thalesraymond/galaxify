@@ -1,14 +1,20 @@
 import { Request, Response } from "express";
-import { handleRegisterUserCommand } from "./command.js";
+import { execute } from "./command.js";
 import { RegisterUserDto } from "@galaxify/commons";
+import { HttpError } from "../../utils/http-error.js";
 
-export const handleRegisterUser = async (req: Request<unknown, unknown, RegisterUserDto>, res: Response) => {
+export const handleRegisterUser = async (
+    req: Request<unknown, unknown, RegisterUserDto>,
+    res: Response
+) => {
     try {
-        const user = await handleRegisterUserCommand(req.body);
+        const user = await execute(req.body);
         res.status(201).json(user);
     } catch (error) {
-        const errorDetails = error as Error;
-        console.error(errorDetails.message);
-        res.status(500).json({ message: "Internal server error", originalError: errorDetails.message });
+        if (error instanceof HttpError) {
+            res.status(error.statusCode).json({ message: error.message });
+        } else {
+            res.status(500).json({ message: "Internal server error" });
+        }
     }
 };
