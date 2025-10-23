@@ -34,7 +34,7 @@ export default function LandingPage() {
                                     journey of space exploration, ship customization, and charting the unknown.
                                 </p>
                                 <a
-                                    href="#"
+                                    href="/register"
                                     className="inline-block bg-cyan-500 text-gray-900 font-bold px-10 py-4 rounded-lg text-lg transform hover:scale-105 transition-transform duration-300 hud-glow"
                                 >
                                     Start Your Expedition, Captain!

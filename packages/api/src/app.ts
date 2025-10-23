@@ -62,4 +62,4 @@ try {
     console.log(error);
 }
 
-export default app;
+export const viteNodeApp = app;
