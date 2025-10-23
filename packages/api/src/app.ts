@@ -9,7 +9,13 @@ import mongoose from "mongoose";
 
 import authRouter from "./features/userRegister/index.js";
 
-//end routes
+// end routes
+
+// middleware
+
+import limiter from "./middleware/rateLimiter.js";
+
+// end middleware
 
 const app = express();
 
@@ -32,6 +38,7 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
+app.use("/api", limiter);
 
 app.get("/api/health", (req, res) => {
     res.status(200).json({ status: "ok" });
