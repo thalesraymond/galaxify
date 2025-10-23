@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { execute } from "./command.js";
 import { RegisterUserDto } from "@galaxify/commons";
-import { HttpError } from "../../utils/http-error.js";
 import BadRequestError from "@/errors/BadRequestError.js";
 
 export const handleRegisterUser = async (req: Request<unknown, unknown, RegisterUserDto>, res: Response) => {
