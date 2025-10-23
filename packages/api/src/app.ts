@@ -8,6 +8,8 @@ import mongoose from "mongoose";
 // routes
 
 import authRouter from "./features/userRegister/index.js";
+import userLoginRouter from "./features/login/index.js";
+import userLogoutRouter from "./features/logout/index.js";
 
 // end routes
 
@@ -45,6 +47,8 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/auth", userLoginRouter);
+app.use("/api/auth", userLogoutRouter);
 
 try {
     if (!process.env.MONGO_CONNECTION_STRING) {
