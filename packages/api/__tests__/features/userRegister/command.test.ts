@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import bcrypt from "bcryptjs";
-import { execute } from "../src/features/userRegister/command.js";
-import UserModel from "../src/models/UserModel.js";
-import BadRequestError from "../src/errors/BadRequestError.js";
+import { execute } from "../../../src/features/userRegister/command.js";
+import UserModel from "../../../src/models/UserModel.js";
+import BadRequestError from "../../../src/errors/BadRequestError.js";
 import { RegisterUserDto } from "@galaxify/commons";
 
 // Mock the dependencies

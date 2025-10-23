@@ -1,10 +1,8 @@
-import { describe, it, expect, vi, beforeEach, afterEach, type Mock } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
 import { Request, Response } from "express";
 import { handleRegisterUser } from "../../../src/features/userRegister/handler.js";
-import * as userRegisterCommand from "../../../src/features/userRegister/command.js";
-import { HttpError } from "../../../src/utils/http-error.js";
-
-vi.mock("../../../src/features/userRegister/command.js");
+import * as registerCommand from "../../../src/features/userRegister/command.js";
+import BadRequestError from "../../../src/errors/BadRequestError.js";
 
 describe("userRegister handler", () => {
     let req: Partial<Request>;
@@ -19,7 +17,7 @@ describe("userRegister handler", () => {
             status,
             json,
         };
-        status.mockReturnValue(res);
+        status.mockReturnValueOnce(res);
         req = {
             body: {
                 email: "test@example.com",
@@ -34,7 +32,7 @@ describe("userRegister handler", () => {
 
     describe("when registration is successful", () => {
         beforeEach(async () => {
-            vi.spyOn(userRegisterCommand, "execute").mockResolvedValueOnce({
+            vi.spyOn(registerCommand, "execute").mockResolvedValueOnce({
                 id: "123",
                 email: "test@example.com",
             });
@@ -42,7 +40,7 @@ describe("userRegister handler", () => {
         });
 
         it("should call execute with the request body", () => {
-            expect(userRegisterCommand.execute).toHaveBeenCalledWith(req.body);
+            expect(registerCommand.execute).toHaveBeenCalledWith(req.body);
         });
 
         it("should return a 201 status code", () => {
@@ -59,14 +57,14 @@ describe("userRegister handler", () => {
 
     describe("when execute throws an HttpError", () => {
         beforeEach(async () => {
-            vi.spyOn(userRegisterCommand, "execute").mockRejectedValueOnce(
-                new HttpError(409, "User with this email already exists.")
+            vi.spyOn(registerCommand, "execute").mockRejectedValueOnce(
+                new BadRequestError("User with this email already exists.")
             );
             await handleRegisterUser(req as Request, res as Response);
         });
 
         it("should return the correct status code", () => {
-            expect(status).toHaveBeenCalledWith(409);
+            expect(status).toHaveBeenCalledWith(400);
         });
 
         it("should return the error message in the response", () => {
@@ -78,7 +76,8 @@ describe("userRegister handler", () => {
 
     describe("when execute throws a generic error", () => {
         beforeEach(async () => {
-            vi.spyOn(userRegisterCommand, "execute").mockRejectedValueOnce(new Error("Something went wrong"));
+            vi.spyOn(registerCommand, "execute").mockRejectedValueOnce(new Error("Something went wrong"));
+
             await handleRegisterUser(req as Request, res as Response);
         });
 
