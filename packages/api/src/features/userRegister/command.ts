@@ -11,7 +11,7 @@ export interface User {
 }
 
 // All logic for the registration command is here
-export async function handleRegisterUserCommand(dto: RegisterUserDto): Promise<User> {
+export async function execute(dto: RegisterUserDto): Promise<User> {
     // 1. Business Logic: Validate password
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
     if (!passwordRegex.test(dto.password)) {
