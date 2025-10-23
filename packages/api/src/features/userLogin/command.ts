@@ -30,7 +30,7 @@ export async function execute(dto: LoginUserDto): Promise<{ token: string }> {
         { id: user._id, email: user.email },
         process.env.JWT_SECRET as string,
         {
-            expiresIn: process.env.JWT_EXPIRES_IN,
+            expiresIn: parseInt(process.env.JWT_EXPIRES_IN || "86400", 10),
         }
     );
 

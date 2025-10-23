@@ -42,7 +42,7 @@ describe("userLogin command", () => {
             expect(jwt.sign).toHaveBeenCalledWith(
                 { id: mockUser._id, email: mockUser.email },
                 process.env.JWT_SECRET,
-                { expiresIn: process.env.JWT_EXPIRES_IN }
+                { expiresIn: parseInt(process.env.JWT_EXPIRES_IN || "86400", 10) }
             );
             expect(result).toEqual({ token: "mockedToken" });
         });
