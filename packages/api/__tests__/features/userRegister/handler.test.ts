@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
 import { Request, Response } from "express";
-import { handleRegisterUser } from "../src/features/userRegister/handler.js";
-import * as registerCommand from "../src/features/userRegister/command.js";
-import { HttpError } from "../src/utils/http-error.js";
+import { handleRegisterUser } from "../../../src/features/userRegister/handler.js";
+import * as registerCommand from "../../../src/features/userRegister/command.js";
+import BadRequestError from "../../../src/errors/BadRequestError.js";
 
 describe("userRegister handler", () => {
     let req: Partial<Request>;
@@ -17,7 +17,7 @@ describe("userRegister handler", () => {
             status,
             json,
         };
-        status.mockReturnValue(res);
+        status.mockReturnValueOnce(res);
         req = {
             body: {
                 email: "test@example.com",
@@ -58,13 +58,13 @@ describe("userRegister handler", () => {
     describe("when execute throws an HttpError", () => {
         beforeEach(async () => {
             vi.spyOn(registerCommand, "execute").mockRejectedValueOnce(
-                new HttpError(409, "User with this email already exists.")
+                new BadRequestError("User with this email already exists.")
             );
             await handleRegisterUser(req as Request, res as Response);
         });
 
         it("should return the correct status code", () => {
-            expect(status).toHaveBeenCalledWith(409);
+            expect(status).toHaveBeenCalledWith(400);
         });
 
         it("should return the error message in the response", () => {
