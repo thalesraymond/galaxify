@@ -1,6 +1,6 @@
 export type Habit = {
   _id: string;
-  userId: string;
+  userId: any;
   title: string;
   description?: string;
   isPositive: boolean;

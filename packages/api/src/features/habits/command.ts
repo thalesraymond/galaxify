@@ -1,6 +1,6 @@
 import { CreateHabitDto, UpdateHabitDto } from '@galaxify/commons';
 import { HabitModel } from './habit.model.js';
-import { NotFoundError } from '../../errors/NotFoundError.js';
+import NotFoundError from '../../errors/NotFoundError.js';
 
 export const createHabit = async (userId: string, dto: CreateHabitDto) => {
   const habit = await HabitModel.create({ ...dto, userId });
