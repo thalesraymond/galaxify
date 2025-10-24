@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Header from "@/app/components/Header";
 
 export default function RegisterPage() {
     const [email, setEmail] = useState("");
@@ -49,17 +50,7 @@ export default function RegisterPage() {
                 <div className="absolute inset-0 bg-blue-950/80 backdrop-blur-sm"></div>
 
                 <div className="relative z-10">
-                    <header className="container mx-auto px-6 py-4">
-                        <nav className="flex items-center justify-between">
-                            <div className="text-2xl font-bold font-orbitron text-white">GALAXIFY</div>
-                            <a
-                                href="/login"
-                                className="hidden md:inline-block bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-6 py-2 rounded-md hover:bg-cyan-500/40 transition-colors"
-                            >
-                                Login
-                            </a>
-                        </nav>
-                    </header>
+                    <Header button="login" />
 
                     <main>
                         <section className="container mx-auto px-6 py-20 md:py-32 text-center">
