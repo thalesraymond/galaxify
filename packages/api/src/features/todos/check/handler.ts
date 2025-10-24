@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { checkTodoCommand } from "./command";
+import { checkTodoCommand } from "./command.js";
 
 export const checkTodoHandler = async (
   req: Request,

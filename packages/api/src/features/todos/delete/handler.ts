@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { deleteTodoCommand } from "./command";
+import { deleteTodoCommand } from "./command.js";
 
 export const deleteTodoHandler = async (
   req: Request,

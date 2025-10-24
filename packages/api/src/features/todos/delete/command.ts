@@ -1,5 +1,5 @@
-import { NotFoundError } from "../../../errors/NotFoundError";
-import { Todo } from "../todo.model";
+import NotFoundError from "../../../errors/NotFoundError.js";
+import { Todo } from "../todo.model.js";
 
 export const deleteTodoCommand = async (userId: string, todoId: string) => {
   const todo = await Todo.findOneAndDelete({ _id: todoId, userId });

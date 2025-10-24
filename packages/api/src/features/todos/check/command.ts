@@ -1,6 +1,6 @@
-import { BadRequestError } from "../../../errors/BadRequestError";
-import { NotFoundError } from "../../../errors/NotFoundError";
-import { Todo } from "../todo.model";
+import BadRequestError from "../../../errors/BadRequestError.js";
+import NotFoundError from "../../../errors/NotFoundError.js";
+import { Todo } from "../todo.model.js";
 
 export const checkTodoCommand = async (userId: string, todoId: string) => {
   const todo = await Todo.findOne({ _id: todoId, userId });

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { handleLoginUser } from "../../../src/features/login/handler.js";
+import { loginHandler } from "../../../src/features/login/handler.js";
 import * as command from "../../../src/features/login/command.js";
 import UnauthorizedError from "../../../src/errors/UnauthorizedError.js";
 
@@ -28,7 +28,7 @@ describe("userLogin handler", () => {
         });
 
         it("should return a 200 status and a JWT token", async () => {
-            await handleLoginUser(mockReq, mockRes);
+            await loginHandler(mockReq, mockRes);
 
             expect(mockRes.status).toHaveBeenCalledWith(200);
             expect(mockRes.json).toHaveBeenCalledWith({ token: "mockedToken" });
@@ -41,7 +41,7 @@ describe("userLogin handler", () => {
         });
 
         it("should return a 401 status and an error message", async () => {
-            await handleLoginUser(mockReq, mockRes);
+            await loginHandler(mockReq, mockRes);
 
             expect(mockRes.status).toHaveBeenCalledWith(401);
             expect(mockRes.json).toHaveBeenCalledWith({ message: "invalid credentials" });
@@ -54,7 +54,7 @@ describe("userLogin handler", () => {
         });
 
         it("should return a 500 status and a generic error message", async () => {
-            await handleLoginUser(mockReq, mockRes);
+            await loginHandler(mockReq, mockRes);
 
             expect(mockRes.status).toHaveBeenCalledWith(500);
             expect(mockRes.json).toHaveBeenCalledWith({ message: "Internal server error" });

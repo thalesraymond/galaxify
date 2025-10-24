@@ -3,7 +3,7 @@ import { execute } from "./command.js";
 import { LoginUserDto } from "@galaxify/commons";
 import UnauthorizedError from "@/errors/UnauthorizedError.js";
 
-export const handleLoginUser = async (req: Request<unknown, unknown, LoginUserDto>, res: Response) => {
+export const loginHandler = async (req: Request<unknown, unknown, LoginUserDto>, res: Response) => {
     try {
         const { token } = await execute(req.body);
 

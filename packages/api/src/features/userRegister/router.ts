@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userRegisterHandler } from "./handler";
+import { userRegisterHandler } from "./handler.js";
 
 const router = Router();
 

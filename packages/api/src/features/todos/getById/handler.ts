@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { getTodoByIdCommand } from "./command";
+import { getTodoByIdCommand } from "./command.js";
 
 export const getTodoByIdHandler = async (
   req: Request,

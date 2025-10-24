@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { createTodoHandler } from "./create";
-import { getAllTodosHandler } from "./getAll";
-import { getTodoByIdHandler } from "./getById";
-import { updateTodoHandler } from "./update";
-import { deleteTodoHandler } from "./delete";
-import { checkTodoHandler } from "./check";
-import { isAuthenticated } from "../../../middleware/authMiddleware";
+import { createTodoHandler } from "./create/index.js";
+import { getAllTodosHandler } from "./getAll/index.js";
+import { getTodoByIdHandler } from "./getById/index.js";
+import { updateTodoHandler } from "./update/index.js";
+import { deleteTodoHandler } from "./delete/index.js";
+import { checkTodoHandler } from "./check/index.js";
+import { isAuthenticated } from "../../middleware/authMiddleware.js";
 
 const router = Router();
 

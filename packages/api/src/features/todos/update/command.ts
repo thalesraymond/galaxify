@@ -1,6 +1,6 @@
 import { UpdateTodoDto } from "@galaxify/commons";
-import { NotFoundError } from "../../../errors/NotFoundError";
-import { Todo } from "../todo.model";
+import NotFoundError from "../../../errors/NotFoundError.js";
+import { Todo } from "../todo.model.js";
 
 export const updateTodoCommand = async (
   userId: string,

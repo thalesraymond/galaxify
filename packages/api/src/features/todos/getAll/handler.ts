@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { getAllTodosCommand } from "./command";
+import { getAllTodosCommand } from "./command.js";
 
 export const getAllTodosHandler = async (
   req: Request,

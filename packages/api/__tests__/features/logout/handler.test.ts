@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { handleLogoutUser } from "../../../src/features/logout/handler.js";
+import { logoutHandler } from "../../../src/features/logout/handler.js";
 
 describe("userLogout handler", () => {
     const mockReq: any = {};
@@ -14,7 +14,7 @@ describe("userLogout handler", () => {
     });
 
     it("should return a 200 status and a success message", async () => {
-        await handleLogoutUser(mockReq, mockRes);
+        await logoutHandler(mockReq, mockRes);
 
         expect(mockRes.status).toHaveBeenCalledWith(200);
         expect(mockRes.json).toHaveBeenCalledWith({ message: "Logout successful" });

@@ -3,7 +3,7 @@ import { execute } from "./command.js";
 import { RegisterUserDto } from "@galaxify/commons";
 import BadRequestError from "@/errors/BadRequestError.js";
 
-export const handleRegisterUser = async (req: Request<unknown, unknown, RegisterUserDto>, res: Response) => {
+export const userRegisterHandler = async (req: Request<unknown, unknown, RegisterUserDto>, res: Response) => {
     try {
         const user = await execute(req.body);
 

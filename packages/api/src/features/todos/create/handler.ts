@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { CreateTodoDto } from "@galaxify/commons";
-import { createTodoCommand } from "./command";
+import { createTodoCommand } from "./command.js";
 
 export const createTodoHandler = async (
   req: Request,

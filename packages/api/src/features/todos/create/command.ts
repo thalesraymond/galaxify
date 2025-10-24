@@ -1,5 +1,5 @@
 import { CreateTodoDto } from "@galaxify/commons";
-import { Todo } from "../todo.model";
+import { Todo } from "../todo.model.js";
 
 export const createTodoCommand = async (
   userId: string,

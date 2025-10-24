@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
 import { Request, Response } from "express";
-import { handleRegisterUser } from "../../../src/features/userRegister/handler.js";
+import { userRegisterHandler } from "../../../src/features/userRegister/handler.js";
 import * as registerCommand from "../../../src/features/userRegister/command.js";
 import BadRequestError from "../../../src/errors/BadRequestError.js";
 
@@ -36,7 +36,7 @@ describe("userRegister handler", () => {
                 id: "123",
                 email: "test@example.com",
             });
-            await handleRegisterUser(req as Request, res as Response);
+            await userRegisterHandler(req as Request, res as Response);
         });
 
         it("should call execute with the request body", () => {
@@ -60,7 +60,7 @@ describe("userRegister handler", () => {
             vi.spyOn(registerCommand, "execute").mockRejectedValueOnce(
                 new BadRequestError("User with this email already exists.")
             );
-            await handleRegisterUser(req as Request, res as Response);
+            await userRegisterHandler(req as Request, res as Response);
         });
 
         it("should return the correct status code", () => {
@@ -78,7 +78,7 @@ describe("userRegister handler", () => {
         beforeEach(async () => {
             vi.spyOn(registerCommand, "execute").mockRejectedValueOnce(new Error("Something went wrong"));
 
-            await handleRegisterUser(req as Request, res as Response);
+            await userRegisterHandler(req as Request, res as Response);
         });
 
         it("should return a 500 status code", () => {
