@@ -31,14 +31,18 @@ export async function execute(dailyId: string, userId: string): Promise<Daily> {
             startDate = new Date(0);
     }
 
-    const counter = daily.checks.filter(check => check >= startDate).length;
+    const counter = daily.checks.filter(
+        (check) => (check as unknown as Date).getTime() >= startDate.getTime()
+    ).length;
 
     return {
         id: daily._id.toString(),
         title: daily.title,
-        description: daily.description,
+        description: daily.description ?? undefined,
         resetCounter: daily.resetCounter as 'daily' | 'weekly' | 'monthly',
-        checks: daily.checks,
+        checks: typeof daily.checks.toObject === "function"
+                ? daily.checks.toObject()
+                : daily.checks,
         counter,
     };
 }

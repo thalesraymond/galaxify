@@ -7,7 +7,7 @@ export async function execute(userId: string): Promise<Daily[]> {
 
     const now = new Date();
 
-    return dailies.map(daily => {
+    return dailies.map((daily) => {
         let startDate: Date;
 
         switch (daily.resetCounter) {
@@ -24,14 +24,19 @@ export async function execute(userId: string): Promise<Daily[]> {
                 startDate = new Date(0);
         }
 
-        const counter = daily.checks.filter(check => check >= startDate).length;
+        const counter = daily.checks.filter(
+            (check) => (check as unknown as Date).getTime() >= startDate.getTime()
+        ).length;
 
         return {
             id: daily._id.toString(),
             title: daily.title,
-            description: daily.description,
-            resetCounter: daily.resetCounter as 'daily' | 'weekly' | 'monthly',
-            checks: daily.checks,
+            description: daily.description ?? undefined,
+            resetCounter: daily.resetCounter as "daily" | "weekly" | "monthly",
+            checks:
+                typeof daily.checks.toObject === "function"
+                    ? daily.checks.toObject()
+                    : daily.checks,
             counter,
         };
     });

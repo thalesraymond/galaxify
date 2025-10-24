@@ -10,9 +10,11 @@ export async function execute(dto: CreateDailyDto, userId: string): Promise<Dail
     return {
         id: daily._id.toString(),
         title: daily.title,
-        description: daily.description,
+        description: daily.description ?? undefined,
         resetCounter: daily.resetCounter as 'daily' | 'weekly' | 'monthly',
-        checks: daily.checks,
+        checks: typeof daily.checks.toObject === "function"
+                ? daily.checks.toObject()
+                : daily.checks,
         counter: 0,
     };
 }
