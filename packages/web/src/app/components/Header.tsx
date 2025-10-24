@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface HeaderProps {
     button: 'login' | 'register';
 }
@@ -9,15 +11,15 @@ const Header = ({ button }: HeaderProps) => {
     return (
         <header className="container mx-auto px-6 py-4">
             <nav className="flex items-center justify-between">
-                <a href="/" className="text-2xl font-bold font-orbitron text-white">
+                <Link href="/" className="text-2xl font-bold font-orbitron text-white">
                     GALAXIFY
-                </a>
-                <a
+                </Link>
+                <Link
                     href={buttonLink}
                     className="hidden md:inline-block bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-6 py-2 rounded-md hover:bg-cyan-500/40 transition-colors"
                 >
                     {buttonText}
-                </a>
+                </Link>
             </nav>
         </header>
     );
