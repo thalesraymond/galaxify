@@ -7,9 +7,10 @@ import mongoose from "mongoose";
 
 // routes
 
-import authRouter from "./features/userRegister/index.js";
-import userLoginRouter from "./features/login/index.js";
-import userLogoutRouter from "./features/logout/index.js";
+import userRegisterRouter from "./features/userRegister/router.js";
+import userLoginRouter from "./features/login/router.js";
+import userLogoutRouter from "./features/logout/router.js";
+import todosRouter from "./features/todos/router.js";
 
 // end routes
 
@@ -46,9 +47,10 @@ app.get("/api/health", (req, res) => {
     res.status(200).json({ status: "ok" });
 });
 
-app.use("/api/auth", authRouter);
+app.use("/api/auth", userRegisterRouter);
 app.use("/api/auth", userLoginRouter);
 app.use("/api/auth", userLogoutRouter);
+app.use("/api/todos", todosRouter);
 
 try {
     if (!process.env.MONGO_CONNECTION_STRING) {
