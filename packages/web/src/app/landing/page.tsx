@@ -1,3 +1,5 @@
+import Header from "@/app/components/Header";
+
 export default function LandingPage() {
     return (
         <div className="bg-blue-950 text-gray-200 antialiased">
@@ -8,17 +10,7 @@ export default function LandingPage() {
                 {/* Conteúdo da página */}
                 <div className="relative z-10">
                     {/* Header */}
-                    <header className="container mx-auto px-6 py-4">
-                        <nav className="flex items-center justify-between">
-                            <div className="text-2xl font-bold font-orbitron text-white">GALAXIFY</div>
-                            <a
-                                href="#"
-                                className="hidden md:inline-block bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-6 py-2 rounded-md hover:bg-cyan-500/40 transition-colors"
-                            >
-                                Login
-                            </a>
-                        </nav>
-                    </header>
+                    <Header button="login" />
 
                     {/* Main Content */}
                     <main>
