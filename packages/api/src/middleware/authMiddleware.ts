@@ -21,7 +21,7 @@ export const isAuthenticated = (
     };
     req.user = { _id: payload.userId };
     next();
-  } catch (error) {
+  } catch {
     throw new UnauthenticatedError("Authentication invalid");
   }
 };
