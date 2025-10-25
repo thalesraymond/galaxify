@@ -4,7 +4,7 @@ import NotFoundError from "@/errors/NotFoundError.js";
 
 export const handleCheckDaily = async (req: Request, res: Response) => {
     try {
-        // @ts-ignore
+        // @ts-expect-error user is not defined on Request
         const daily = await execute(req.params.id, req.user.id);
 
         return res.status(200).json(daily);
