@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import UnauthenticatedError from '../errors/UnauthenticatedError.js';
-import UserModel from '../models/UserModel.js';
-
 interface JwtPayload {
   id: string;
 }
@@ -24,7 +22,7 @@ export const authenticate = async (
     const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
     req.user = { id: payload.id };
     next();
-  } catch (error) {
+  } catch {
     next(new UnauthenticatedError('Authentication invalid'));
   }
 };

@@ -1,4 +1,4 @@
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { Habit } from '@galaxify/commons';
 
 const habitSchema = new Schema<Habit>(
@@ -40,10 +40,10 @@ const habitSchema = new Schema<Habit>(
   {
     timestamps: true,
     toJSON: {
-      transform: (doc, ret) => {
-        (ret as any).id = ret._id;
-        delete (ret as any)._id;
-        delete (ret as any).__v;
+      transform: (doc, ret: Record<string, unknown>) => {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
       },
     },
   }
