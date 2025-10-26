@@ -8,7 +8,7 @@ export const createHabitHandler = async (
   next: NextFunction
 ) => {
   try {
-    const habit = await command.createHabit(req.user.id, req.body);
+    const habit = await command.createHabit(req.user!.id, req.body);
     res.status(StatusCodes.CREATED).json(habit);
   } catch (err) {
     next(err);
@@ -21,7 +21,7 @@ export const getHabitsHandler = async (
   next: NextFunction
 ) => {
   try {
-    const habits = await command.getHabits(req.user.id);
+    const habits = await command.getHabits(req.user!.id);
     res.status(StatusCodes.OK).json(habits);
   } catch (err) {
     next(err);
@@ -34,7 +34,7 @@ export const getHabitHandler = async (
   next: NextFunction
 ) => {
   try {
-    const habit = await command.getHabit(req.user.id, req.params.id);
+    const habit = await command.getHabit(req.user!.id, req.params.id);
     res.status(StatusCodes.OK).json(habit);
   } catch (err) {
     next(err);
@@ -48,7 +48,7 @@ export const updateHabitHandler = async (
 ) => {
   try {
     const habit = await command.updateHabit(
-      req.user.id,
+      req.user!.id,
       req.params.id,
       req.body
     );
@@ -64,7 +64,7 @@ export const deleteHabitHandler = async (
   next: NextFunction
 ) => {
   try {
-    await command.deleteHabit(req.user.id, req.params.id);
+    await command.deleteHabit(req.user!.id, req.params.id);
     res.status(StatusCodes.NO_CONTENT).send();
   } catch (err) {
     next(err);
@@ -77,7 +77,7 @@ export const incrementHabitHandler = async (
   next: NextFunction
 ) => {
   try {
-    const habit = await command.incrementHabit(req.user.id, req.params.id);
+    const habit = await command.incrementHabit(req.user!.id, req.params.id);
     res.status(StatusCodes.OK).json(habit);
   } catch (err) {
     next(err);
@@ -90,7 +90,7 @@ export const decrementHabitHandler = async (
   next: NextFunction
 ) => {
   try {
-    const habit = await command.decrementHabit(req.user.id, req.params.id);
+    const habit = await command.decrementHabit(req.user!.id, req.params.id);
     res.status(StatusCodes.OK).json(habit);
   } catch (err) {
     next(err);
