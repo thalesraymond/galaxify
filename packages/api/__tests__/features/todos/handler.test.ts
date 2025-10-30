@@ -7,8 +7,8 @@ import {
   updateTodoHandler,
   deleteTodoHandler,
   checkTodoHandler,
-} from '../../../src/features/todos/handler';
-import * as command from '../../../src/features/todos/command';
+} from '../../../src/features/todos/handler.js';
+import * as command from '../../../src/features/todos/command.js';
 import { StatusCodes } from 'http-status-codes';
 
 vi.mock('../../../src/features/todos/command');
