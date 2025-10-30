@@ -7,6 +7,7 @@ const todoSchema = new Schema<Todo>(
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any,
     title: {
       type: String,
