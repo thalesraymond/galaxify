@@ -13,15 +13,15 @@ import UpdateTodoDto from "./todos/UpdateTodoDto.js";
 import Todo from "./todos/Todo.js";
 
 // user register
-export { RegisterUserDto, UserRegisterResponse };
+export type { RegisterUserDto, UserRegisterResponse };
 
 // login
-export { LoginUserDto, UserLoginResponse };
+export type { LoginUserDto, UserLoginResponse };
 
 // habits
-export { CreateHabitDto, UpdateHabitDto, Habit };
+export type { CreateHabitDto, UpdateHabitDto, Habit };
 
 // dailies
-export { CreateDailyDto, UpdateDailyDto, Daily };
+export type { CreateDailyDto, UpdateDailyDto, Daily };
 // todos
-export { CreateTodoDto, UpdateTodoDto, Todo };
+export type { CreateTodoDto, UpdateTodoDto, Todo };
