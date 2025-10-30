@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi, type Mock } from 'vitest';
-import { HabitModel } from '../../../src/features/habits/habit.model';
-import * as command from '../../../src/features/habits/command';
-import NotFoundError from '../../../src/errors/NotFoundError';
+import { HabitModel } from '../../../src/features/habits/habit.model.js';
+import * as command from '../../../src/features/habits/command.js';
+import NotFoundError from '../../../src/errors/NotFoundError.js';
 
-vi.mock('../../../src/features/habits/habit.model');
+vi.mock('../../../src/features/habits/habit.model.js');
 
 describe('Habit Commands', () => {
   const userId = 'user-123';

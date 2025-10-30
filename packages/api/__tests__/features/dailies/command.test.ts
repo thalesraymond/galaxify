@@ -1,10 +1,10 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import * as command from '../command.js';
-import { DailyModel } from '../daily.model.js';
-import NotFoundError from '../../../errors/NotFoundError.js';
+import { describe, it, expect, vi, beforeEach, afterEach, type Mock } from 'vitest';
+import * as command from '../../../src/features/dailies/command.js';
+import { DailyModel } from '../../../src/features/dailies/daily.model.js';
+import NotFoundError from '../../../src/errors/NotFoundError.js';
 import { CreateDailyDto, UpdateDailyDto } from '@galaxify/commons';
 
-vi.mock('../daily.model.js', () => ({
+vi.mock('../../../src/features/dailies/daily.model.js', () => ({
   DailyModel: {
     create: vi.fn(),
     find: vi.fn(),
@@ -33,7 +33,7 @@ describe('Dailies Command', () => {
         resetCounter: 'daily',
       };
       const daily = { ...dto, userId, toJSON: () => ({ ...dto, userId }) };
-      (DailyModel.create as vi.Mock).mockResolvedValue(daily);
+      (DailyModel.create as Mock).mockResolvedValue(daily);
 
       const result = await command.createDaily(userId, dto);
 
@@ -48,7 +48,7 @@ describe('Dailies Command', () => {
         { title: 'Daily 1', toJSON: () => ({ title: 'Daily 1' }) },
         { title: 'Daily 2', toJSON: () => ({ title: 'Daily 2' }) },
       ];
-      (DailyModel.find as vi.Mock).mockResolvedValue(dailies);
+      (DailyModel.find as Mock).mockResolvedValue(dailies);
 
       const result = await command.getDailies(userId);
 
@@ -62,7 +62,7 @@ describe('Dailies Command', () => {
 
     it('should return a single daily', async () => {
       const daily = { title: 'Test Daily', toJSON: () => ({ title: 'Test Daily' }) };
-      (DailyModel.findOne as vi.Mock).mockResolvedValue(daily);
+      (DailyModel.findOne as Mock).mockResolvedValue(daily);
 
       const result = await command.getDaily(userId, dailyId);
 
@@ -71,7 +71,7 @@ describe('Dailies Command', () => {
     });
 
     it('should throw an error if the daily is not found', async () => {
-      (DailyModel.findOne as vi.Mock).mockResolvedValue(null);
+      (DailyModel.findOne as Mock).mockResolvedValue(null);
 
       await expect(command.getDaily(userId, dailyId)).rejects.toThrow(
         new NotFoundError('Daily not found')
@@ -85,7 +85,7 @@ describe('Dailies Command', () => {
     it('should update a daily', async () => {
       const dto: UpdateDailyDto = { title: 'Updated Daily' };
       const daily = { ...dto, toJSON: () => ({ ...dto }) };
-      (DailyModel.findOneAndUpdate as vi.Mock).mockResolvedValue(daily);
+      (DailyModel.findOneAndUpdate as Mock).mockResolvedValue(daily);
 
       const result = await command.updateDaily(userId, dailyId, dto);
 
@@ -98,7 +98,7 @@ describe('Dailies Command', () => {
     });
 
     it('should throw an error if the daily is not found', async () => {
-      (DailyModel.findOneAndUpdate as vi.Mock).mockResolvedValue(null);
+      (DailyModel.findOneAndUpdate as Mock).mockResolvedValue(null);
 
       await expect(
         command.updateDaily(userId, dailyId, {})
@@ -110,7 +110,7 @@ describe('Dailies Command', () => {
     const dailyId = 'daily-123';
 
     it('should delete a daily', async () => {
-      (DailyModel.deleteOne as vi.Mock).mockResolvedValue({ deletedCount: 1 });
+      (DailyModel.deleteOne as Mock).mockResolvedValue({ deletedCount: 1 });
 
       await command.deleteDaily(userId, dailyId);
 
@@ -118,7 +118,7 @@ describe('Dailies Command', () => {
     });
 
     it('should throw an error if the daily is not found', async () => {
-      (DailyModel.deleteOne as vi.Mock).mockResolvedValue({ deletedCount: 0 });
+      (DailyModel.deleteOne as Mock).mockResolvedValue({ deletedCount: 0 });
 
       await expect(command.deleteDaily(userId, dailyId)).rejects.toThrow(
         new NotFoundError('Daily not found')
@@ -142,7 +142,7 @@ describe('Dailies Command', () => {
           checks: [date],
         }),
       };
-      (DailyModel.findOneAndUpdate as vi.Mock).mockResolvedValue(daily);
+      (DailyModel.findOneAndUpdate as Mock).mockResolvedValue(daily);
 
       const result = await command.checkDaily(userId, dailyId);
 
@@ -155,7 +155,7 @@ describe('Dailies Command', () => {
     });
 
     it('should throw an error if the daily is not found', async () => {
-      (DailyModel.findOneAndUpdate as vi.Mock).mockResolvedValue(null);
+      (DailyModel.findOneAndUpdate as Mock).mockResolvedValue(null);
 
       await expect(command.checkDaily(userId, dailyId)).rejects.toThrow(
         new NotFoundError('Daily not found')

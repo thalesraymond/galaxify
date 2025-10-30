@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach, vi, afterEach, type Mock } from "vitest";
 import { Request, Response, NextFunction } from "express";
-import * as command from "../../../src/features/habits/command";
-import * as handler from "../../../src/features/habits/handler";
+import * as command from "../../../src/features/habits/command.js";
+import * as handler from "../../../src/features/habits/handler.js";
 import { StatusCodes } from "http-status-codes";
 
-vi.mock("../../../src/features/habits/command");
+vi.mock("../../../src/features/habits/command.js");
 
 describe("Habit Handlers", () => {
     let req: Partial<Request>;
