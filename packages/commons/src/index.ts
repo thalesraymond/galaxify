@@ -8,6 +8,9 @@ import { Habit } from "./habits/Habit.js";
 import { CreateDailyDto } from "./dailies/CreateDailyDto.js";
 import { UpdateDailyDto } from "./dailies/UpdateDailyDto.js";
 import { Daily } from "./dailies/Daily.js";
+import CreateTodoDto from "./todos/CreateTodoDto.js";
+import UpdateTodoDto from "./todos/UpdateTodoDto.js";
+import Todo from "./todos/Todo.js";
 
 // user register
 export { RegisterUserDto, UserRegisterResponse };
@@ -20,3 +23,5 @@ export { CreateHabitDto, UpdateHabitDto, Habit };
 
 // dailies
 export { CreateDailyDto, UpdateDailyDto, Daily };
+// todos
+export { CreateTodoDto, UpdateTodoDto, Todo };

@@ -12,6 +12,7 @@ import userLoginRouter from "./features/login/index.js";
 import userLogoutRouter from "./features/logout/index.js";
 import habitRouter from "./features/habits/index.js";
 import dailiesRouter from "./features/dailies/index.js";
+import todoRouter from "./features/todos/index.js";
 
 // end routes
 
@@ -54,6 +55,7 @@ app.use("/api/auth", userLoginRouter);
 app.use("/api/auth", userLogoutRouter);
 app.use("/api/habits", habitRouter);
 app.use("/api/dailies", dailiesRouter);
+app.use("/api/todos", todoRouter);
 
 app.use(ErrorHandlerMiddleware.errorHandler);
 
