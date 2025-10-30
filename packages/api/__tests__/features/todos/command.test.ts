@@ -1,7 +1,7 @@
-import { describe, it, expect, vi, type Mock } from 'vitest';
-import * as command from '../../../src/features/todos/command';
-import { TodoModel } from '../../../src/features/todos/todo.model';
-import NotFoundError from '../../../src/errors/NotFoundError';
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import * as command from '../../../src/features/todos/command.js';
+import { TodoModel } from '../../../src/features/todos/todo.model.js';
+import NotFoundError from '../../../src/errors/NotFoundError.js';
 
 vi.mock('../../../src/features/todos/todo.model');
 
