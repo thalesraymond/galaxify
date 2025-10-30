@@ -10,6 +10,6 @@
     "outDir": "./dist",
     "paths": { "@/*": ["./src/*"] }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "vite.config.ts" ]
+  "include": ["src", "__tests__"],
+  "exclude": ["node_modules", "dist", "vite.config.ts" ]
 }
