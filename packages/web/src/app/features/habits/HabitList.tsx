@@ -12,7 +12,7 @@ const HabitList = ({ habits, onEdit, onDelete, onComplete }: HabitListProps) => 
   if (habits.length === 0) {
     return (
       <p className="text-center text-gray-500">
-        You don't have any habits yet. Create one!
+        You don&apos;t have any habits yet. Create one!
       </p>
     );
   }

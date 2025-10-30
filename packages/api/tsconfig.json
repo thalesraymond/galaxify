@@ -8,8 +8,9 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "paths": { "@/*": ["./src/*"] }
+    "paths": { "@/*": ["./src/*"] },
+    "types": ["vitest/globals"]
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "vite.config.ts" ]
+  "include": ["src", "__tests__"],
+  "exclude": ["node_modules", "dist", "vite.config.ts" ]
 }

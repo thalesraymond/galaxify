@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { execute } from "./command.js";
 import { LoginUserDto } from "@galaxify/commons";
-import UnauthorizedError from "@/errors/UnauthorizedError.js";
+import UnauthorizedError from "../../errors/UnauthorizedError.js";
 
 export const handleLoginUser = async (req: Request<unknown, unknown, LoginUserDto>, res: Response) => {
     try {

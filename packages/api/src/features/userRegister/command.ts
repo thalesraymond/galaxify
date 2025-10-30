@@ -2,7 +2,7 @@
 import { RegisterUserDto } from "@galaxify/commons";
 import bcrypt from "bcryptjs";
 import UserModel from "../../models/UserModel.js";
-import BadRequestError from "@/errors/BadRequestError.js";
+import BadRequestError from "../../errors/BadRequestError.js";
 
 // The entity representing our user
 export interface User {
