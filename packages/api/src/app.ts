@@ -17,6 +17,7 @@ import habitRouter from "./features/habits/index.js";
 // middleware
 
 import limiter from "./middleware/rateLimiter.js";
+import ErrorHandlerMiddleware from "./middleware/ErrorHandlerMiddleware.js";
 
 // end middleware
 
@@ -51,6 +52,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/auth", userLoginRouter);
 app.use("/api/auth", userLogoutRouter);
 app.use("/api/habits", habitRouter);
+
+app.use(ErrorHandlerMiddleware.errorHandler);
 
 try {
     if (!process.env.MONGO_CONNECTION_STRING) {
