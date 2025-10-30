@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, vi, type Mock } from 'vitest';
 import { HabitModel } from '../../../src/features/habits/habit.model';
 import * as command from '../../../src/features/habits/command';
-import { NotFoundError } from '../../../src/errors/NotFoundError';
+import NotFoundError from '../../../src/errors/NotFoundError';
 
 vi.mock('../../../src/features/habits/habit.model');
 
@@ -22,7 +22,7 @@ describe('Habit Commands', () => {
         resetCounter: 'daily' as const,
       };
       const mockHabit = { ...dto, userId, toJSON: () => ({ ...dto, userId }) };
-      (HabitModel.create as vi.Mock).mockResolvedValue(mockHabit);
+      (HabitModel.create as Mock).mockResolvedValue(mockHabit);
 
       const result = await command.createHabit(userId, dto);
 
@@ -37,7 +37,7 @@ describe('Habit Commands', () => {
         { toJSON: () => ({ title: 'Habit 1' }) },
         { toJSON: () => ({ title: 'Habit 2' }) },
       ];
-      (HabitModel.find as vi.Mock).mockResolvedValue(mockHabits);
+      (HabitModel.find as Mock).mockResolvedValue(mockHabits);
 
       const result = await command.getHabits(userId);
 
@@ -49,7 +49,7 @@ describe('Habit Commands', () => {
   describe('getHabit', () => {
     it('should return a single habit', async () => {
       const mockHabit = { toJSON: () => ({ _id: habitId, userId }) };
-      (HabitModel.findOne as vi.Mock).mockResolvedValue(mockHabit);
+      (HabitModel.findOne as Mock).mockResolvedValue(mockHabit);
 
       const result = await command.getHabit(userId, habitId);
 
@@ -58,7 +58,7 @@ describe('Habit Commands', () => {
     });
 
     it('should throw NotFoundError if habit is not found', async () => {
-      (HabitModel.findOne as vi.Mock).mockResolvedValue(null);
+      (HabitModel.findOne as Mock).mockResolvedValue(null);
       await expect(command.getHabit(userId, habitId)).rejects.toThrow(NotFoundError);
     });
   });
@@ -67,7 +67,7 @@ describe('Habit Commands', () => {
     it('should update and return a habit', async () => {
         const dto = { title: 'Updated Habit' };
         const mockHabit = { toJSON: () => ({ _id: habitId, ...dto }) };
-        (HabitModel.findOneAndUpdate as vi.Mock).mockResolvedValue(mockHabit);
+        (HabitModel.findOneAndUpdate as Mock).mockResolvedValue(mockHabit);
 
         const result = await command.updateHabit(userId, habitId, dto);
 
@@ -80,20 +80,20 @@ describe('Habit Commands', () => {
       });
 
     it('should throw NotFoundError if habit to update is not found', async () => {
-      (HabitModel.findOneAndUpdate as vi.Mock).mockResolvedValue(null);
+      (HabitModel.findOneAndUpdate as Mock).mockResolvedValue(null);
       await expect(command.updateHabit(userId, habitId, {})).rejects.toThrow(NotFoundError);
     });
   });
 
   describe('deleteHabit', () => {
     it('should delete a habit', async () => {
-        (HabitModel.deleteOne as vi.Mock).mockResolvedValue({ deletedCount: 1 });
+        (HabitModel.deleteOne as Mock).mockResolvedValue({ deletedCount: 1 });
         await expect(command.deleteHabit(userId, habitId)).resolves.toBeUndefined();
         expect(HabitModel.deleteOne).toHaveBeenCalledWith({ _id: habitId, userId });
       });
 
     it('should throw NotFoundError if habit to delete is not found', async () => {
-        (HabitModel.deleteOne as vi.Mock).mockResolvedValue({ deletedCount: 0 });
+        (HabitModel.deleteOne as Mock).mockResolvedValue({ deletedCount: 0 });
         await expect(command.deleteHabit(userId, habitId)).rejects.toThrow(NotFoundError);
     });
   });
@@ -101,7 +101,7 @@ describe('Habit Commands', () => {
   describe('incrementHabit', () => {
     it('should increment the positive count', async () => {
       const mockHabit = { toJSON: () => ({ positiveCount: 1 }) };
-      (HabitModel.findOneAndUpdate as vi.Mock).mockResolvedValue(mockHabit);
+      (HabitModel.findOneAndUpdate as Mock).mockResolvedValue(mockHabit);
 
       const result = await command.incrementHabit(userId, habitId);
 
@@ -114,7 +114,7 @@ describe('Habit Commands', () => {
     });
 
     it('should throw NotFoundError if habit to increment is not found', async () => {
-      (HabitModel.findOneAndUpdate as vi.Mock).mockResolvedValue(null);
+      (HabitModel.findOneAndUpdate as Mock).mockResolvedValue(null);
       await expect(command.incrementHabit(userId, habitId)).rejects.toThrow(NotFoundError);
     });
   });
@@ -122,7 +122,7 @@ describe('Habit Commands', () => {
   describe('decrementHabit', () => {
     it('should increment the negative count', async () => {
       const mockHabit = { toJSON: () => ({ negativeCount: 1 }) };
-      (HabitModel.findOneAndUpdate as vi.Mock).mockResolvedValue(mockHabit);
+      (HabitModel.findOneAndUpdate as Mock).mockResolvedValue(mockHabit);
 
       const result = await command.decrementHabit(userId, habitId);
 
@@ -135,7 +135,7 @@ describe('Habit Commands', () => {
     });
 
     it('should throw NotFoundError if habit to decrement is not found', async () => {
-        (HabitModel.findOneAndUpdate as vi.Mock).mockResolvedValue(null);
+        (HabitModel.findOneAndUpdate as Mock).mockResolvedValue(null);
         await expect(command.decrementHabit(userId, habitId)).rejects.toThrow(NotFoundError);
       });
   });
