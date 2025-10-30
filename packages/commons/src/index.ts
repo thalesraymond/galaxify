@@ -5,6 +5,9 @@ import UserRegisterResponse from "./userRegister/UserRegisterResponse.js";
 import { CreateHabitDto } from "./habits/CreateHabitDto.js";
 import { UpdateHabitDto } from "./habits/UpdateHabitDto.js";
 import { Habit } from "./habits/Habit.js";
+import CreateTodoDto from "./todos/CreateTodoDto.js";
+import UpdateTodoDto from "./todos/UpdateTodoDto.js";
+import Todo from "./todos/Todo.js";
 
 // user register
 export { RegisterUserDto, UserRegisterResponse };
@@ -14,3 +17,6 @@ export { LoginUserDto, UserLoginResponse };
 
 // habits
 export { CreateHabitDto, UpdateHabitDto, Habit };
+
+// todos
+export { CreateTodoDto, UpdateTodoDto, Todo };
