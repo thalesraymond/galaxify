@@ -1,12 +1,51 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
-    button: 'login' | 'register';
+    button: 'login' | 'register' | 'logout';
 }
 
 const Header = ({ button }: HeaderProps) => {
-    const buttonText = button === 'login' ? 'Login' : 'Register';
-    const buttonLink = button === 'login' ? '/login' : '/register';
+    const router = useRouter();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        router.push('/login');
+    };
+
+    const getButton = () => {
+        switch (button) {
+            case 'login':
+                return (
+                    <Link
+                        href="/login"
+                        className="hidden md:inline-block bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-6 py-2 rounded-md hover:bg-cyan-500/40 transition-colors"
+                    >
+                        Login
+                    </Link>
+                );
+            case 'register':
+                return (
+                    <Link
+                        href="/register"
+                        className="hidden md:inline-block bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-6 py-2 rounded-md hover:bg-cyan-500/40 transition-colors"
+                    >
+                        Register
+                    </Link>
+                );
+            case 'logout':
+                return (
+                    <button
+                        onClick={handleLogout}
+                        className="hidden md:inline-block bg-red-500/20 text-red-300 border border-red-400/30 px-6 py-2 rounded-md hover:bg-red-500/40 transition-colors"
+                    >
+                        Logout
+                    </button>
+                );
+        }
+    };
 
     return (
         <header className="container mx-auto px-6 py-4">
@@ -14,12 +53,7 @@ const Header = ({ button }: HeaderProps) => {
                 <Link href="/" className="text-2xl font-bold font-orbitron text-white">
                     GALAXIFY
                 </Link>
-                <Link
-                    href={buttonLink}
-                    className="hidden md:inline-block bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-6 py-2 rounded-md hover:bg-cyan-500/40 transition-colors"
-                >
-                    {buttonText}
-                </Link>
+                {getButton()}
             </nav>
         </header>
     );
